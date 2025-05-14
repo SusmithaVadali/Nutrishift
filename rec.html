@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Food Replacements</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://d2z0k43lzfi12d.cloudfront.net/blog/vcdn374/wp-content/uploads/2020/08/healthy-grocery-list-13-pantry-essentials_ft-1024x683.jpg.webp') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            text-align: center;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin: 0;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #output {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Healthy Food Replacements</h1>
+    </header>
+
+    <form id="foodReplacementForm">
+        <label for="junkItem">Enter Junk Food Item:</label>
+        <input type="text" id="junkItem" name="junkItem" required>
+        <button type="button" onclick="suggestReplacement()">Get Healthy Replacement</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        function suggestReplacement() {
+            var junkItemInput = document.getElementById('junkItem');
+            var outputDiv = document.getElementById('output');
+
+            var junkItem = junkItemInput.value.toLowerCase();
+            var replacement = getHealthyReplacement(junkItem);
+
+            outputDiv.innerHTML = '<strong>For ' + junkItem + ', try:</strong> ' + replacement;
+        }
+
+        function getHealthyReplacement(junkItem) {
+            var replacements = {
+                'chocolate': 'dark chocolate with nuts',
+                'chips': 'baked sweet potato chips',
+                'soda': 'sparkling water with a splash of fruit juice',
+                'candy': 'mixed nuts or trail mix',
+                'ice cream': 'frozen yogurt with fresh berries',
+                'pizza': 'homemade veggie pizza with a cauliflower crust',
+                'burger': 'grilled chicken or veggie burger with whole grain bun',
+                'french fries': 'oven-baked sweet potato fries',
+                'cookies': 'oatmeal cookies with raisins and nuts',
+                'sugary cereals': 'whole-grain cereal with fresh fruit',
+                'fried chicken': 'baked or grilled chicken with herbs',
+                'hot dogs': 'turkey or chicken sausages with whole grain buns',
+                'macaroni and cheese': 'whole wheat pasta with homemade cheese sauce and veggies',
+                'fried rice': 'quinoa stir-fry with mixed vegetables and tofu or shrimp',
+                'sugary drinks': 'infused water with slices of citrus and mint',
+                'doughnuts': 'baked cinnamon sugar doughnuts',
+                'canned soup': 'homemade vegetable soup with lean protein',
+                'white bread': 'whole grain or multigrain bread',
+                'instant noodles': 'zucchini noodles with homemade tomato sauce',
+                'potato chips': 'kale chips seasoned with olive oil and sea salt',
+                'milkshakes': 'smoothies with Greek yogurt and fresh fruits',
+                'canned fruit in syrup': 'fresh or frozen fruit without added sugar',
+                'energy drinks': 'green tea or herbal tea',
+                'canned pasta': 'whole wheat pasta with tomato sauce and veggies',
+            };
+
+            return replacements[junkItem] || 'Sorry, no specific replacement found. Consider a variety of fresh fruits and vegetables!';
+        }
+    </script>
+</body>
+</html>

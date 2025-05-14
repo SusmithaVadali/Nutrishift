@@ -1,0 +1,112 @@
+<!-- faqs.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://img.freepik.com/premium-vector/man-thinking-healthy-food_24877-65944.jpg?w=740') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        header {
+            background: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            background: #555;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .faq-item h3 {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FAQs</h1>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/know-nutrition">Know the Nutrition</a>
+        <a href="/set-reminders">Set Reminders</a>
+        <a href="/tips">Tips</a>
+        <a href="/faqs">FAQs</a>
+    </nav>
+    
+    <form>
+        <label for="question">Ask a Question:</label>
+        <input type="text" id="question" name="question" required>
+        <button type="button" onclick="submitQuestion()">Ask</button>
+    </form>
+
+    <!-- Pre-existing FAQs for demonstration purposes -->
+    <div class="faq-item">
+        <h3>Q: What are the recommended daily servings of fruits and vegetables?</h3>
+        <p>A: The general recommendation is to consume at least 5 servings of fruits and vegetables per day.</p>
+    </div>
+    <div class="faq-item">
+        <h3>Q: How much water should I drink in a day?</h3>
+        <p>A: The recommended daily water intake varies, but a common guideline is to drink about 8 glasses (64 ounces) per day.</p>
+    </div>
+
+    <!-- JavaScript function for submitting questions (you can include this in a separate script file) -->
+    <script>
+        function submitQuestion() {
+            // You can add the logic for submitting the question here
+            var question = document.getElementById('question').value;
+            alert('Question submitted: ' + question);
+            // Add further logic to handle the question submission, e.g., send it to a server for processing
+        }
+    </script>
+</body>
+</html>

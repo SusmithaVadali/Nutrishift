@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutritional Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlldHxlbnwwfHwwfHx8MA%3D%3D'); /* Add the path to your background image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #resultContainer {
+            margin-top: 20px;
+            display: none;
+        }
+
+        #resultBox {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Nutritional Calculator</h1>
+        <form id="nutritionForm" onsubmit="calculateNutrition(); return false;">
+            <label for="foodName">Enter Food Name:</label>
+            <input type="text" id="foodName" required>
+            <label for="gramsIntake">Enter Grams Intake:</label>
+            <input type="number" id="gramsIntake" required>
+            <button type="submit">Calculate Nutrition</button>
+        </form>
+        
+        <div id="resultContainer">
+            <div id="resultBox">
+                <h2 id="resultTitle"></h2>
+                <ul id="nutritionList"></ul>
+                <p id="healthiness"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateNutrition() {
+            var foodName = document.getElementById('foodName').value.toLowerCase();
+            var gramsIntake = parseFloat(document.getElementById('gramsIntake').value);
+
+            var nutritionData = {
+                'apple': { 'fat': 0.2, 'protein': 0.3, 'carbohydrates': 19.1, 'cholesterol': 0, 'healthy': true },
+                'banana': { 'fat': 0.3, 'protein': 1.3, 'carbohydrates': 27.0, 'cholesterol': 0, 'healthy': true },
+                'chicken breast': { 'fat': 3.6, 'protein': 31.0, 'carbohydrates': 0.6, 'cholesterol': 85, 'healthy': true },
+              
+                
+                'salmon': { 'fat': 13.0, 'protein': 25.0, 'carbohydrates': 0.0, 'cholesterol': 85, 'healthy': true },
+                'broccoli': { 'fat': 0.6, 'protein': 2.7, 'carbohydrates': 11.2, 'cholesterol': 0, 'healthy': true },
+                'spinach': { 'fat': 0.4, 'protein': 2.9, 'carbohydrates': 6.7, 'cholesterol': 0, 'healthy': true },
+                'egg': { 'fat': 5.3, 'protein': 6.7, 'carbohydrates': 0.6, 'cholesterol': 186, 'healthy': true },
+                'potato': { 'fat': 0.2, 'protein': 2.0, 'carbohydrates': 18.4, 'cholesterol': 0, 'healthy': true },
+                'avocado': { 'fat': 14.7, 'protein': 2.0, 'carbohydrates': 8.5, 'cholesterol': 0, 'healthy': true },
+                'carrot': { 'fat': 0.2, 'protein': 0.9, 'carbohydrates': 9.6, 'cholesterol': 0, 'healthy': true },
+                'orange': { 'fat': 0.2, 'protein': 1.2, 'carbohydrates': 8.3, 'cholesterol': 0, 'healthy': true },
+                'yogurt': { 'fat': 2.6, 'protein': 10.0, 'carbohydrates': 3.6, 'cholesterol': 31, 'healthy': true },
+                'beef': { 'fat': 18.3, 'protein': 26.1, 'carbohydrates': 0.0, 'cholesterol': 94, 'healthy': false },
+                'tomato': { 'fat': 0.3, 'protein': 0.9, 'carbohydrates': 3.9, 'cholesterol': 0, 'healthy': true },
+                'rice': { 'fat': 0.3, 'protein': 2.7, 'carbohydrates': 28.2, 'cholesterol': 0, 'healthy': true },
+                'cheese': { 'fat': 33.0, 'protein': 25.0, 'carbohydrates': 1.3, 'cholesterol': 105, 'healthy': false },
+                'peanut butter': { 'fat': 16.0, 'protein': 7.0, 'carbohydrates': 8.0, 'cholesterol': 0, 'healthy': false },
+                'blueberries': { 'fat': 0.4, 'protein': 0.7, 'carbohydrates': 9.7, 'cholesterol': 0, 'healthy': true },
+                'oatmeal': { 'fat': 1.9, 'protein': 3.2, 'carbohydrates': 58.0, 'cholesterol': 0, 'healthy': true },
+                'almonds': { 'fat': 14.0, 'protein': 6.0, 'carbohydrates': 6.0, 'cholesterol': 0, 'healthy': true },
+                'bell pepper': { 'fat': 0.3, 'protein': 1.0, 'carbohydrates': 6.0, 'cholesterol': 0, 'healthy': true },
+                'chocolate': { 'fat': 8.5, 'protein': 2.2, 'carbohydrates': 59.0, 'cholesterol': 5, 'healthy': false },
+            };
+
+            if (foodName in nutritionData) {
+                var nutritionInfo = nutritionData[foodName];
+
+                // Calculate intake based on provided grams
+                var intake = {};
+                for (var nutrient in nutritionInfo) {
+                    intake[nutrient] = (nutritionInfo[nutrient] / 100) * gramsIntake;
+                }
+
+                var healthiness = evaluateHealthiness(intake);
+                displayResult(foodName, intake, healthiness, nutritionInfo['healthy']);
+            } else {
+                alert(`No data found for ${foodName}`);
+            }
+        }
+
+        function evaluateHealthiness(intake) {
+            // Set thresholds for each nutrient to determine healthiness
+            var thresholds = {
+                'fat': 5,        
+                'protein': 2,    // Example: More than 2 grams is considered healthy for protein
+                'carbohydrates': 30,  // Example: Less than 30 grams is considered healthy for carbohydrates
+                'cholesterol': 50,   // Example: Less than 50 milligrams is considered healthy for cholesterol
+            };
+
+            // Check if intake is healthy based on thresholds
+            for (var nutrient in intake) {
+                if (intake[nutrient] > thresholds[nutrient]) {
+                    return "Not Healthy";
+                }
+            }
+
+            return "Healthy";
+        }
+
+       /* function displayResult(foodName, intake, healthiness, isHealthy) {
+            var resultTitle = document.getElementById('resultTitle');
+            var nutritionList = document.getElementById('nutritionList');
+            var healthinessElement = document.getElementById('healthiness');
+            var resultContainer = document.getElementById('resultContainer');
+
+            resultTitle.innerHTML = `Nutritional Information for ${foodName} (${document.getElementById('gramsIntake').value} grams)`;
+
+            // Round nutritional values to three decimal places
+            var roundedIntake = {};
+            for (var nutrient in intake) {
+                roundedIntake[nutrient] = parseFloat(intake[nutrient].toFixed(3));
+            }
+
+            nutritionList.innerHTML = `<li>Fat: ${roundedIntake['fat']}g</li><li>Protein: ${roundedIntake['protein']}g</li><li>Carbohydrates: ${roundedIntake['carbohydrates']}g</li><li>Cholesterol: ${roundedIntake['cholesterol']}mg</li>`;
+
+            healthinessElement.innerHTML = `Healthiness: <span style="color: ${isHealthy ? 'green' : 'red'}">${healthiness}</span>`;
+
+            resultContainer.style.display = 'block';
+       }*/
+       function evaluateHealthiness(intake) {
+    // Set thresholds for each nutrient to determine healthiness
+    var thresholds = {
+        'fat': 5,        // Example: Less than 5 grams is considered healthy for fat
+        'protein': 2,    // Example: More than 2 grams is considered healthy for protein
+        'carbohydrates': 30,  // Example: Less than 30 grams is considered healthy for carbohydrates
+        'cholesterol': 50,   // Example: Less than 50 milligrams is considered healthy for cholesterol
+    };
+
+    // Check if intake is healthy based on thresholds
+    for (var nutrient in intake) {
+        if (intake[nutrient] > thresholds[nutrient]) {
+            return  "Not Healthy";
+        }
+    }
+
+    return  "Healthy";
+}
+
+function displayResult(foodName, intake, healthiness, isHealthy) {
+    var resultTitle = document.getElementById('resultTitle');
+    var nutritionList = document.getElementById('nutritionList');
+    var healthinessElement = document.getElementById('healthiness');
+    var resultContainer = document.getElementById('resultContainer');
+
+    resultTitle.innerHTML = `Nutritional Information for ${foodName} (${document.getElementById('gramsIntake').value} grams)`;
+
+    // Round nutritional values to three decimal places
+    var roundedIntake = {};
+    for (var nutrient in intake) {
+        roundedIntake[nutrient] = parseFloat(intake[nutrient].toFixed(3));
+    }
+
+    nutritionList.innerHTML = `<li>Fat: ${roundedIntake['fat']}g</li><li>Protein: ${roundedIntake['protein']}g</li><li>Carbohydrates: ${roundedIntake['carbohydrates']}g</li><li>Cholesterol: ${roundedIntake['cholesterol']}mg</li>`;
+
+    healthinessElement.innerHTML = `Healthiness: <span style="color: ${"Healthy" ? 'green' : ''}">${healthiness}</span>`;
+
+    resultContainer.style.display = 'block';
+}
+
+
+
+
+    </script>
+</body>
+</html>
